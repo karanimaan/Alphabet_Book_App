@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createButtonGrid() {
         for (letter in 'A'..'Z') {
-            
+
         }
     }
 }
