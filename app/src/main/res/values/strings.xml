@@ -5,4 +5,5 @@
     <string name="button_next">Next page</string>
     <string name="button_last">Last page (‘Z’)</string>
     <string name="button_overview">Overview</string>
+    <string name="menuItem_overview">Overview</string>
 </resources>
