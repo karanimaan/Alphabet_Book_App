@@ -1,10 +1,13 @@
 package com.example.alphabetbookapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
+const val EXTRA_LETTER = "com.example.alphabetbookapp.LETTER"
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +38,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onItemClick(letter: String) {
-        Toast.makeText(this, letter, Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, LetterPageActivity::class.java).apply {
+            putExtra(EXTRA_LETTER, letter)
+        }
+        startActivity(intent)
     }
 
 
