@@ -8,19 +8,13 @@ import android.view.View
 import android.widget.ImageView
 
 class LetterPageActivity : AppCompatActivity() {
-    var letter = 'A'
+    private var letter = 'A'
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_letter_page)
 
         letter = intent.getCharExtra(EXTRA_LETTER, 'A')
         setImage(letter)
-
-        /*val previousButton = findViewById<Button>(R.id.button2)
-        previousButton.setOnClickListener(View.OnClickListener {
-            val letter = previousButton.text[0] - 1
-            setImage(letter)
-        })*/
     }
 
     private fun setImage(letter: Char) {
@@ -51,8 +45,7 @@ class LetterPageActivity : AppCompatActivity() {
     }
 
     fun overview(view: View) {
-        intent = Intent(this, OverviewPageActivity::class.java)
-        startActivity(intent)
+        finish()
     }
 
     override fun onPause() {

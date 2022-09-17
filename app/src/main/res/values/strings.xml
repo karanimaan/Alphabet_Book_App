@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Alphabet Book App</string>
+    <string name="app_name">Alphabet Book</string>
     <string name="button_first">First page (‘A’)</string>
     <string name="button_previous">Previous page</string>
     <string name="button_next">Next page</string>

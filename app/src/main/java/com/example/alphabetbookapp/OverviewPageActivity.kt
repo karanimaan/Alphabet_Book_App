@@ -34,7 +34,15 @@ class OverviewPageActivity : AppCompatActivity() {
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
 
-
+        val sharedPreferences = getSharedPreferences("Alphabet", Context.MODE_PRIVATE)
+        val page = sharedPreferences.getString("page", "LetterPageActivity")
+        val letter = sharedPreferences.getString("letter", "A")?.toCharArray()?.get(0)
+        if (page == "LetterPageActivity") {
+            val intent = Intent(this, LetterPageActivity::class.java).apply {
+                putExtra(EXTRA_LETTER, letter)
+            }
+            startActivity(intent)
+        }
 
 
     }
