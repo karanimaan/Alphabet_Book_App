@@ -3,24 +3,24 @@ package com.example.alphabetbookapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class CustomAdapter(private val mList: List<ItemsViewModel>,
+                    private val onItemClick: (letter: String) -> Unit)
+    : RecyclerView.Adapter<CustomAdapter.RecyclerViewHolder>() {
 
     // create new views
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        // inflates the card_view_design view
-        // that is used to hold list item
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
+        // inflates the card_view_design view that is used to hold list item
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_view_design, parent, false)
 
-        return ViewHolder(view)
+        return RecyclerViewHolder(view, onItemClick)
     }
 
     // binds the list items to a view
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
 
         val ItemsViewModel = mList[position]
 
@@ -35,7 +35,18 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
     }
 
     // Holds the views for adding it to image and text
-    class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
+    class RecyclerViewHolder(rootView: View, private val onItemClick: (letter: String) -> Unit)
+        : RecyclerView.ViewHolder(rootView), View.OnClickListener {
+
         val textView: TextView = itemView.findViewById(R.id.textView)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(p0: View?) {
+            val letter = textView.text as String
+            onItemClick(letter)
+        }
     }
 }
