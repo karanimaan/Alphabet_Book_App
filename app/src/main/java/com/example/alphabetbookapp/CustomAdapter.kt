@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class CustomAdapter(private val mList: List<ItemsViewModel>,
-                    private val onItemClick: (letter: String) -> Unit)
+                    private val onItemClick: (letter: Char) -> Unit)
     : RecyclerView.Adapter<CustomAdapter.RecyclerViewHolder>() {
 
     // create new views
@@ -35,7 +35,7 @@ class CustomAdapter(private val mList: List<ItemsViewModel>,
     }
 
     // Holds the views for adding it to image and text
-    class RecyclerViewHolder(rootView: View, private val onItemClick: (letter: String) -> Unit)
+    class RecyclerViewHolder(rootView: View, private val onItemClick: (letter: Char) -> Unit)
         : RecyclerView.ViewHolder(rootView), View.OnClickListener {
 
         val textView: TextView = itemView.findViewById(R.id.textView)
@@ -45,7 +45,7 @@ class CustomAdapter(private val mList: List<ItemsViewModel>,
         }
 
         override fun onClick(p0: View?) {
-            val letter = textView.text as String
+            val letter = textView.text[0]
             onItemClick(letter)
         }
     }

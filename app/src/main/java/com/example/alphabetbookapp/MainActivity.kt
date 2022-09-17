@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun onItemClick(letter: String) {
+    private fun onItemClick(letter: Char) {
         val intent = Intent(this, LetterPageActivity::class.java).apply {
             putExtra(EXTRA_LETTER, letter)
         }
