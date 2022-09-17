@@ -1,10 +1,10 @@
 package com.example.alphabetbookapp
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 
 class LetterPageActivity : AppCompatActivity() {
@@ -51,7 +51,16 @@ class LetterPageActivity : AppCompatActivity() {
     }
 
     fun overview(view: View) {
-        intent = Intent(this, MainActivity::class.java)
+        intent = Intent(this, OverviewPageActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val sharedPreferences = getSharedPreferences("Alphabet", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("page", "LetterPageActivity")
+        editor.putString("letter", letter.toString())
+        editor.apply()
     }
 }
