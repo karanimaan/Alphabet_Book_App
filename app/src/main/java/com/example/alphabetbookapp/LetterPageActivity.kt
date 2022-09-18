@@ -14,7 +14,7 @@ class LetterPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_letter_page)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)   // Display back actionBar item
 
         letter = intent.getCharExtra(EXTRA_LETTER, 'A')
         setImage(letter)
@@ -30,18 +30,11 @@ class LetterPageActivity : AppCompatActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
+    // on button clicks
 
     fun firstPage(view: View) {
         setImage('A')
     }
-
 
     fun previousPage(view: View) {
         setImage(letter - 1)
@@ -55,12 +48,20 @@ class LetterPageActivity : AppCompatActivity() {
         setImage('Z')
     }
 
-    fun overview(view: View) {
-        finish()
+
+    // on back click
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()    // close activity
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onPause() {
         super.onPause()
+
+        // save page
         val sharedPreferences = getSharedPreferences("Alphabet", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("page", "LetterPageActivity")

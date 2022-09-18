@@ -49,13 +49,6 @@
             android:onClick="lastPage"
             android:text="@string/button_last" />
 
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="overview"
-            android:text="@string/button_overview" />
     </LinearLayout>
 
     <ImageView

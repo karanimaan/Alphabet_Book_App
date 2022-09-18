@@ -29,32 +29,21 @@ class OverviewPageActivity : AppCompatActivity() {
         }
 
         // This will pass the ArrayList to our Adapter
-        val adapter = CustomAdapter(data) { letter -> onItemClick(letter) }
+        val adapter = CustomAdapter(data) { letter -> openLetterPage(letter) }
 
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
 
+        // load page
         val sharedPreferences = getSharedPreferences("Alphabet", Context.MODE_PRIVATE)
         val page = sharedPreferences.getString("page", "LetterPageActivity")
-        val letter = sharedPreferences.getString("letter", "A")?.toCharArray()?.get(0)
+        val letter = sharedPreferences.getString("letter", "A")!!.toCharArray()[0]
         if (page == "LetterPageActivity") {
-            val intent = Intent(this, LetterPageActivity::class.java).apply {
-                putExtra(EXTRA_LETTER, letter)
-            }
-            startActivity(intent)
+            openLetterPage(letter)
         }
-
-
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        val page = savedInstanceState.getString("page", "LetterPageActivity")
-        val pageIntent = Intent(this, Class.forName(page))
-        startActivity(pageIntent)
-    }
-
-    private fun onItemClick(letter: Char) {
+    private fun openLetterPage(letter: Char) {
         val intent = Intent(this, LetterPageActivity::class.java).apply {
             putExtra(EXTRA_LETTER, letter)
         }
@@ -64,7 +53,7 @@ class OverviewPageActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         val sharedPreferences = getSharedPreferences("Alphabet", Context.MODE_PRIVATE)
-        var editor = sharedPreferences.edit()
+        val editor = sharedPreferences.edit()
         editor.putString("page", "OverviewPageActivity")
         editor.apply()
     }
