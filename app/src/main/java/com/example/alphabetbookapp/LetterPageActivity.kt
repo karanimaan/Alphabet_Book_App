@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 
@@ -12,6 +13,8 @@ class LetterPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_letter_page)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         letter = intent.getCharExtra(EXTRA_LETTER, 'A')
         setImage(letter)
@@ -25,6 +28,14 @@ class LetterPageActivity : AppCompatActivity() {
             val resID = resID_A + ('A'..'Z').indexOf(letter)    // Assuming letter images are sequential
             imageView.setImageResource(resID)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun firstPage(view: View) {
